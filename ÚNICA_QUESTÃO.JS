@@ -60,6 +60,19 @@ function atualizarSalario() {
     }
 }
 
+function salvarArquivo() {
+    const fs = require('fs');
+    const data = JSON.stringify(funcionarios, null, 2);
+
+    fs.writeFile('funcionarios.json', data, (err) => {
+        if (err) {
+            console.error("ERRO AO SALVAR ARQUIVO:", err);
+        } else {
+            console.log("ARQUIVO SALVO COM SUCESSO!");
+        }
+    });
+}
+
 function menu() {
     let opcao;
     do {
@@ -68,7 +81,8 @@ function menu() {
         console.log("2. LISTAR FÚNCIONARIOS");
         console.log("3. BUSCAR POR NOME");
         console.log("4. ATUALIZAR SÁLARIO");
-        console.log("5. SAIR");
+        console.log("5. SALVAR ARQUIVO");
+        console.log("6. SAIR");
 
         opcao = readline.question("ESCOLHA UMA OPÇÃO: ");
 
@@ -86,6 +100,9 @@ function menu() {
                 atualizarSalario();
                 break;
             case "5":
+                salvarArquivo();
+                break;
+            case "6":
                 console.log("ENCERRANDO PROGRAMA...");
                 break;
             default:
